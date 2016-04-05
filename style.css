@@ -1,0 +1,36 @@
+.dropdown, .dropdown__list {
+    margin: 0; /* resets the entire list's margin to 0 */
+    padding: 0; /* resets the entire list's padding to 0 */
+}
+
+.dropdown__list {
+    display: none; /* hides the nested list by default */
+    margin: 3px 0 -3px 0; /* repositions the nested list */
+}
+
+.dropdown_open .dropdown__list {
+    display: block;
+}
+
+
+
+
+
+ul.dropdown {
+    border: 1px solid #d7d7d7; /* sets a border around the unordered list */
+    width: 100px; /* gives it a width of 100px */
+}
+ul.dropdown li{
+    background-color: #e7e7e7; /* sets the list's default background color */
+    list-style-type: none; /* removes the list's bullets */
+    padding-bottom: 3px; /*  expands all lists bottom area (padding) with 3 pixels */
+}
+ul.dropdown li:hover {
+    background-color: #e1e1e1; /* sets the background color on hover */
+}
+ul.dropdown li a {
+    color: #444; /* sets all links color */
+    text-decoration: none; /* removes the link's default decoration (underline) */
+    padding-left: 8px; /* adds padding to the left at all links */
+    padding-bottom: 5px; /* adds padding to the bottom at all links */
+}
