@@ -1,3 +1,8 @@
+.dropdown {
+    --fz: 40px;
+    --width: 10em;
+}
+
 .dropdown, .dropdown__list {
     margin: 0; /* resets the entire list's margin to 0 */
     padding: 0; /* resets the entire list's padding to 0 */
@@ -12,14 +17,18 @@
     display: block;
 }
 
-
-
-
-
-ul.dropdown {
-    border: 1px solid #d7d7d7; /* sets a border around the unordered list */
-    width: 100px; /* gives it a width of 100px */
+.dropdown__title {
+    cursor: pointer;
 }
+
+
+.dropdown {
+    border: 0.05em solid #d7d7d7; /* sets a border around the unordered list */
+    width: var(--width);
+    font-size: var(--fz);
+}
+
+
 ul.dropdown li{
     background-color: #e7e7e7; /* sets the list's default background color */
     list-style-type: none; /* removes the list's bullets */
@@ -31,6 +40,6 @@ ul.dropdown li:hover {
 ul.dropdown li a {
     color: #444; /* sets all links color */
     text-decoration: none; /* removes the link's default decoration (underline) */
-    padding-left: 8px; /* adds padding to the left at all links */
-    padding-bottom: 5px; /* adds padding to the bottom at all links */
+    padding-left: 0.5em; /* adds padding to the left at all links */
+    padding-bottom: 0.4em; /* adds padding to the bottom at all links */
 }
