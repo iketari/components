@@ -4,19 +4,27 @@
         <title>My first menu</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
-
     <body>
-        <ul class="js-dropdown dropdown">
-            <li><span class="js-title dropdown__title">menu</span>
-                <ul class="dropdown__list">
-                    <li><a class="dropdown__item" href="">item 1</a></li>
-                    <li><a class="dropdown__item" href="">item 22</a></li>
-                    <li><a class="dropdown__item" href="">item 333</a></li>
-                    <li><a class="dropdown__item" href="">item 4444</a></li>
-                    <li><a class="dropdown__item" href="">item 55555</a></li>
-                </ul>
-            </li>
-        </ul>
+        <script type="text/javascript">
+            var data = {
+                //...
+            }
+        </script>
+        <script id="DropdownTmpl" type="text/template">
+            <ul class="js-dropdown dropdown">
+                <li><span class="js-title dropdown__title">
+                    <%this.title%>
+                </span>
+                    <ul class="dropdown__list">
+                        <%for(var item of this.items) {%>
+                            <li><a class="dropdown__item" href="">
+                                <%item%>
+                            </a></li>
+                        <%}%>
+                    </ul>
+                </li>
+            </ul>
+        </script>
 
         <script src="Dropdown.js"></script>
         <script src="main.js"></script>

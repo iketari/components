@@ -1,6 +1,8 @@
 .dropdown {
     --fz: 40px;
     --width: 10em;
+    display: inline-block;
+    -webkit-user-select: none;
 }
 
 .dropdown, .dropdown__list {

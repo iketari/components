@@ -2,11 +2,18 @@
 	'use strict';
 
 	class Dropdown {
-		constructor (options) {
+		constructor (options, data) {
 			this.el = options.el;
+
+			this._template = document.getElementById(options.template).innerHTML;
+			this.data = data;
 
 			this._itemSelectCallbacks = [];
 			this._initEvents();
+		}
+
+		render () {
+			this.el.innerHTML = TemplateEngine(this._template, this.data);
 		}
 		
 		/**
@@ -14,6 +21,9 @@
 		 */
 		open () {
 			this.el.classList.add('dropdown_open');
+			setTimeout(() => {
+				document.body.addEventListener('click', this._onBodyClick);
+			}, 50);
 		}
 
 		/**
@@ -21,6 +31,7 @@
 		 */
 		close () {
 			this.el.classList.remove('dropdown_open');
+			document.body.removeEventListener('click', this._onBodyClick);
 		}
 
 		/**
@@ -47,6 +58,8 @@
 		}
 
 		_initEvents () {
+			this._onBodyClick = this.close.bind(this);
+
 			this.el.addEventListener('click', this._onClick.bind(this));
 		}
 
