@@ -3,7 +3,9 @@
 class Menu {
   constructor(opts) {
     this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
+    console.time('Handlebars compile menu');
     this._template = Handlebars.compile(this.__templateSrc);
+    console.timeEnd('Handlebars compile menu');
 
     this.el = document.createElement('div');
 

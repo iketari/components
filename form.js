@@ -3,7 +3,9 @@
 class Form {
   constructor(opts) {
     this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
+    console.time('Handlebars compile form');
     this._template = Handlebars.compile(this.__templateSrc);
+    console.timeEnd('Handlebars compile form');
 
     this.el = document.createElement('div');
 
