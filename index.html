@@ -1,24 +1,49 @@
 <!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>My first menu</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
+<html>
 
-    <body>
-        <ul class="js-dropdown dropdown">
-            <li><span class="js-title dropdown__title">menu</span>
-                <ul class="dropdown__list">
-                    <li><a class="dropdown__item" href="">item 1</a></li>
-                    <li><a class="dropdown__item" href="">item 22</a></li>
-                    <li><a class="dropdown__item" href="">item 333</a></li>
-                    <li><a class="dropdown__item" href="">item 4444</a></li>
-                    <li><a class="dropdown__item" href="">item 55555</a></li>
-                </ul>
-            </li>
-        </ul>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="libs/css/pure-min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-        <script src="Dropdown.js"></script>
-        <script src="main.js"></script>
-    </body>
-</html>                                     
+<body>
+
+  <div class="faviconer"></div>
+  <div class="app"></div>
+
+
+  <script id="form" type="text/x-handlebars-template">
+    <a data-action="show" class="js-button pure-button" href="#">Add new</a>
+    <form class="js-form pure-form hidden">
+      <fieldset>
+        <input required="required" type="url" name="href" placeholder="url">
+        <input required="required" type="text" name="anchor" placeholder="text">
+        <button type="submit" class="pure-button pure-button-primary">Save</button>
+      </fieldset>
+    </form>
+  </script>
+
+  <script id="menu" type="text/x-handlebars-template">
+    <div class="pure-menu custom-restricted-width">
+      <spafn class="pure-menu-heading">{{title}}</span>
+
+      <ul class="pure-menu-list">
+        {{#each items}}
+          <li data-index="{{@index}}" class="pure-menu-item">
+            <a href="{{href}}" data-action="pick" class="pure-menu-link">{{anchor}}</a>
+            <i data-action="remove" class="close"></i>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+  <script src="menu.js"></script>
+  <script src="form.js"></script>
+  <script src="model.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

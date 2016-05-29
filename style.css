@@ -1,45 +1,36 @@
-.dropdown {
-    --fz: 40px;
-    --width: 10em;
+/* Styles go here */
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }
 
-.dropdown, .dropdown__list {
-    margin: 0; /* resets the entire list's margin to 0 */
-    padding: 0; /* resets the entire list's padding to 0 */
+.pure-menu-item .close {
+  display: none;
 }
 
-.dropdown__list {
-    display: none; /* hides the nested list by default */
-    margin: 3px 0 -3px 0; /* repositions the nested list */
-}
-
-.dropdown_open .dropdown__list {
-    display: block;
-}
-
-.dropdown__title {
-    cursor: pointer;
-}
-
-
-.dropdown {
-    border: 0.05em solid #d7d7d7; /* sets a border around the unordered list */
-    width: var(--width);
-    font-size: var(--fz);
-}
-
-
-ul.dropdown li{
-    background-color: #e7e7e7; /* sets the list's default background color */
-    list-style-type: none; /* removes the list's bullets */
-    padding-bottom: 3px; /*  expands all lists bottom area (padding) with 3 pixels */
-}
-ul.dropdown li:hover {
-    background-color: #e1e1e1; /* sets the background color on hover */
-}
-ul.dropdown li a {
-    color: #444; /* sets all links color */
-    text-decoration: none; /* removes the link's default decoration (underline) */
-    padding-left: 0.5em; /* adds padding to the left at all links */
-    padding-bottom: 0.4em; /* adds padding to the bottom at all links */
+.pure-menu-item:hover .close {
+  display: block;
 }
