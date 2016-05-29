@@ -1,6 +1,6 @@
 'use strict';
 
-class Menu {
+export default class Menu {
   constructor(opts) {
     this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
     console.time('Handlebars compile menu');

@@ -1,6 +1,6 @@
 'use strict';
 
-class Form {
+export default class Form {
   constructor(opts) {
     this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
     console.time('Handlebars compile form');

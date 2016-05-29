@@ -1,5 +1,12 @@
 "use strict";
 
+import './libs/css/pure-min.css';
+import './style.css';
+
+import Model from './model.js'
+import Form from './form.js'
+import Menu from './menu.js'
+
 const APP_EL = document.querySelector('.app'),
       DATA_KEY = '-KIIIl-A1w7peqCRVZ0R';
 

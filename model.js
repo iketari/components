@@ -1,10 +1,9 @@
 "use strict";
 
-(function() {
   const XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
   const HOST = '//javascriptru.firebaseio.com';
 
-  class Model {
+  export default class Model {
     constructor(opts, data) {
       this._resource = opts.resource;
       this._key = opts.key;
@@ -71,7 +70,3 @@
       xhr.send(JSON.stringify(data || {}));
     }
   }
-
-  //export
-  window.Model = Model;
-})();
