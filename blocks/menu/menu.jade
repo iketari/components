@@ -4,3 +4,4 @@ div(class='pure-menu custom-restricted-width')
         each item, index in items
             li.pure-menu-item(data-index=index)
                 a.pure-menu-link(data-action='pick' href=item.href)= item.anchor
+                i.close(data-action='remove')

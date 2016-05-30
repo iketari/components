@@ -483,7 +483,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var XHR = "onload" in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
-	var HOST = '//javascriptru.firebaseio.com';
+	var HOST = 'https://javascriptru.firebaseio.com';
 
 	var Model = function () {
 	  function Model(opts, data) {
@@ -1103,7 +1103,7 @@
 	    for (var index = 0, $$l = $$obj.length; index < $$l; index++) {
 	      var item = $$obj[index];
 
-	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a></li>");
+	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a><i data-action=\"remove\" class=\"close\"></i></li>");
 	    }
 
 	  } else {
@@ -1111,7 +1111,7 @@
 	    for (var index in $$obj) {
 	      $$l++;      var item = $$obj[index];
 
-	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a></li>");
+	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a><i data-action=\"remove\" class=\"close\"></i></li>");
 	    }
 
 	  }

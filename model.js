@@ -1,7 +1,7 @@
 "use strict";
 
   const XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
-  const HOST = '//javascriptru.firebaseio.com';
+  const HOST = 'https://javascriptru.firebaseio.com';
 
   export default class Model {
     constructor(opts, data) {
