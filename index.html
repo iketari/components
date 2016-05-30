@@ -10,34 +10,6 @@
   <div class="faviconer"></div>
   <div class="app"></div>
 
-
-  <script id="form" type="text/x-handlebars-template">
-    <a data-action="show" class="js-button pure-button" href="#">Add new</a>
-    <form class="js-form pure-form hidden">
-      <fieldset>
-        <input required="required" type="url" name="href" placeholder="url">
-        <input required="required" type="text" name="anchor" placeholder="text">
-        <button type="submit" class="pure-button pure-button-primary">Save</button>
-      </fieldset>
-    </form>
-  </script>
-
-  <script id="menu" type="text/x-handlebars-template">
-    <div class="pure-menu custom-restricted-width">
-      <spafn class="pure-menu-heading">{{title}}</span>
-
-      <ul class="pure-menu-list">
-        {{#each items}}
-          <li data-index="{{@index}}" class="pure-menu-item">
-            <a href="{{href}}" data-action="pick" class="pure-menu-link">{{anchor}}</a>
-            <i data-action="remove" class="close"></i>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
   <script src="bundle.js"></script>
 </body>
 

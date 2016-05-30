@@ -1,11 +1,12 @@
 'use strict';
 
+import template from './form.jade'
+
 export default class Form {
   constructor(opts) {
-    this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
-    console.time('Handlebars compile form');
-    this._template = Handlebars.compile(this.__templateSrc);
-    console.timeEnd('Handlebars compile form');
+    console.time('Handlebars set form');
+    this._template = template;
+    console.timeEnd('Handlebars set form');
 
     this.el = document.createElement('div');
 

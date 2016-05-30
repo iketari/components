@@ -48,17 +48,15 @@
 
 	__webpack_require__(1);
 
-	__webpack_require__(5);
-
-	var _model = __webpack_require__(7);
+	var _model = __webpack_require__(5);
 
 	var _model2 = _interopRequireDefault(_model);
 
-	var _form = __webpack_require__(8);
+	var _form = __webpack_require__(6);
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _menu = __webpack_require__(9);
+	var _menu = __webpack_require__(10);
 
 	var _menu2 = _interopRequireDefault(_menu);
 
@@ -472,46 +470,6 @@
 
 /***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(6);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./node_modules/css-loader/index.js!./style.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "/* Styles go here */\n\n.close {\n  position: absolute;\n  right: 32px;\n  top: 0;\n  width: 32px;\n  height: 32px;\n  opacity: 0.3;\n  cursor: pointer;\n}\n.close:hover {\n  opacity: 1;\n}\n.close:before, .close:after {\n  position: absolute;\n  left: 15px;\n  content: ' ';\n  height: 33px;\n  width: 2px;\n  background-color: #333;\n}\n.close:before {\n  transform: rotate(45deg);\n}\n.close:after {\n  transform: rotate(-45deg);\n}\n\n.pure-menu-item .close {\n  display: none;\n}\n\n.pure-menu-item:hover .close {\n  display: block;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -615,8 +573,8 @@
 	exports.default = Model;
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -626,16 +584,21 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _form = __webpack_require__(7);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Form = function () {
 	  function Form(opts) {
 	    _classCallCheck(this, Form);
 
-	    this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
-	    console.time('Handlebars compile form');
-	    this._template = Handlebars.compile(this.__templateSrc);
-	    console.timeEnd('Handlebars compile form');
+	    console.time('Handlebars set form');
+	    this._template = _form2.default;
+	    console.timeEnd('Handlebars set form');
 
 	    this.el = document.createElement('div');
 
@@ -715,8 +678,273 @@
 	exports.default = Form;
 
 /***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(8);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<a data-action=\"show\" href=\"#\" class=\"js-button pure-button\">" + (jade.escape(null == (jade_interp = 'Add new') ? "" : jade_interp)) + "</a><form class=\"js-form pure-form hidden\"><fieldset><input required=\"required\" type=\"url\" name=\"href\" placeholder=\"url\"><input required=\"required\" type=\"text\" name=\"anchor\" placeholder=\"text\"><button type=\"submit\" class=\"pure-button pure-button-primary\">" + (jade.escape(null == (jade_interp = 'Save') ? "" : jade_interp)) + "</button></fieldset></form>");;return buf.join("");
+	}
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/**
+	 * Merge two attribute objects giving precedence
+	 * to values in object `b`. Classes are special-cased
+	 * allowing for arrays and merging/joining appropriately
+	 * resulting in a string.
+	 *
+	 * @param {Object} a
+	 * @param {Object} b
+	 * @return {Object} a
+	 * @api private
+	 */
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	exports.merge = function merge(a, b) {
+	  if (arguments.length === 1) {
+	    var attrs = a[0];
+	    for (var i = 1; i < a.length; i++) {
+	      attrs = merge(attrs, a[i]);
+	    }
+	    return attrs;
+	  }
+	  var ac = a['class'];
+	  var bc = b['class'];
+
+	  if (ac || bc) {
+	    ac = ac || [];
+	    bc = bc || [];
+	    if (!Array.isArray(ac)) ac = [ac];
+	    if (!Array.isArray(bc)) bc = [bc];
+	    a['class'] = ac.concat(bc).filter(nulls);
+	  }
+
+	  for (var key in b) {
+	    if (key != 'class') {
+	      a[key] = b[key];
+	    }
+	  }
+
+	  return a;
+	};
+
+	/**
+	 * Filter null `val`s.
+	 *
+	 * @param {*} val
+	 * @return {Boolean}
+	 * @api private
+	 */
+
+	function nulls(val) {
+	  return val != null && val !== '';
+	}
+
+	/**
+	 * join array as classes.
+	 *
+	 * @param {*} val
+	 * @return {String}
+	 */
+	exports.joinClasses = joinClasses;
+	function joinClasses(val) {
+	  return (Array.isArray(val) ? val.map(joinClasses) : val && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? Object.keys(val).filter(function (key) {
+	    return val[key];
+	  }) : [val]).filter(nulls).join(' ');
+	}
+
+	/**
+	 * Render the given classes.
+	 *
+	 * @param {Array} classes
+	 * @param {Array.<Boolean>} escaped
+	 * @return {String}
+	 */
+	exports.cls = function cls(classes, escaped) {
+	  var buf = [];
+	  for (var i = 0; i < classes.length; i++) {
+	    if (escaped && escaped[i]) {
+	      buf.push(exports.escape(joinClasses([classes[i]])));
+	    } else {
+	      buf.push(joinClasses(classes[i]));
+	    }
+	  }
+	  var text = joinClasses(buf);
+	  if (text.length) {
+	    return ' class="' + text + '"';
+	  } else {
+	    return '';
+	  }
+	};
+
+	exports.style = function (val) {
+	  if (val && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object') {
+	    return Object.keys(val).map(function (style) {
+	      return style + ':' + val[style];
+	    }).join(';');
+	  } else {
+	    return val;
+	  }
+	};
+	/**
+	 * Render the given attribute.
+	 *
+	 * @param {String} key
+	 * @param {String} val
+	 * @param {Boolean} escaped
+	 * @param {Boolean} terse
+	 * @return {String}
+	 */
+	exports.attr = function attr(key, val, escaped, terse) {
+	  if (key === 'style') {
+	    val = exports.style(val);
+	  }
+	  if ('boolean' == typeof val || null == val) {
+	    if (val) {
+	      return ' ' + (terse ? key : key + '="' + key + '"');
+	    } else {
+	      return '';
+	    }
+	  } else if (0 == key.indexOf('data') && 'string' != typeof val) {
+	    if (JSON.stringify(val).indexOf('&') !== -1) {
+	      console.warn('Since Jade 2.0.0, ampersands (`&`) in data attributes ' + 'will be escaped to `&amp;`');
+	    };
+	    if (val && typeof val.toISOString === 'function') {
+	      console.warn('Jade will eliminate the double quotes around dates in ' + 'ISO form after 2.0.0');
+	    }
+	    return ' ' + key + "='" + JSON.stringify(val).replace(/'/g, '&apos;') + "'";
+	  } else if (escaped) {
+	    if (val && typeof val.toISOString === 'function') {
+	      console.warn('Jade will stringify dates in ISO form after 2.0.0');
+	    }
+	    return ' ' + key + '="' + exports.escape(val) + '"';
+	  } else {
+	    if (val && typeof val.toISOString === 'function') {
+	      console.warn('Jade will stringify dates in ISO form after 2.0.0');
+	    }
+	    return ' ' + key + '="' + val + '"';
+	  }
+	};
+
+	/**
+	 * Render the given attributes object.
+	 *
+	 * @param {Object} obj
+	 * @param {Object} escaped
+	 * @return {String}
+	 */
+	exports.attrs = function attrs(obj, terse) {
+	  var buf = [];
+
+	  var keys = Object.keys(obj);
+
+	  if (keys.length) {
+	    for (var i = 0; i < keys.length; ++i) {
+	      var key = keys[i],
+	          val = obj[key];
+
+	      if ('class' == key) {
+	        if (val = joinClasses(val)) {
+	          buf.push(' ' + key + '="' + val + '"');
+	        }
+	      } else {
+	        buf.push(exports.attr(key, val, false, terse));
+	      }
+	    }
+	  }
+
+	  return buf.join('');
+	};
+
+	/**
+	 * Escape the given string of `html`.
+	 *
+	 * @param {String} html
+	 * @return {String}
+	 * @api private
+	 */
+
+	var jade_encode_html_rules = {
+	  '&': '&amp;',
+	  '<': '&lt;',
+	  '>': '&gt;',
+	  '"': '&quot;'
+	};
+	var jade_match_html = /[&<>"]/g;
+
+	function jade_encode_char(c) {
+	  return jade_encode_html_rules[c] || c;
+	}
+
+	exports.escape = jade_escape;
+	function jade_escape(html) {
+	  var result = String(html).replace(jade_match_html, jade_encode_char);
+	  if (result === '' + html) return html;else return result;
+	};
+
+	/**
+	 * Re-throw the given `err` in context to the
+	 * the jade in `filename` at the given `lineno`.
+	 *
+	 * @param {Error} err
+	 * @param {String} filename
+	 * @param {String} lineno
+	 * @api private
+	 */
+
+	exports.rethrow = function rethrow(err, filename, lineno, str) {
+	  if (!(err instanceof Error)) throw err;
+	  if ((typeof window != 'undefined' || !filename) && !str) {
+	    err.message += ' on line ' + lineno;
+	    throw err;
+	  }
+	  try {
+	    str = str || __webpack_require__(9).readFileSync(filename, 'utf8');
+	  } catch (ex) {
+	    rethrow(err, null, lineno);
+	  }
+	  var context = 3,
+	      lines = str.split('\n'),
+	      start = Math.max(lineno - context, 0),
+	      end = Math.min(lines.length, lineno + context);
+
+	  // Error context
+	  var context = lines.slice(start, end).map(function (line, i) {
+	    var curr = i + start + 1;
+	    return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
+	  }).join('\n');
+
+	  // Alter exception message
+	  err.path = filename;
+	  err.message = (filename || 'Jade') + ':' + lineno + '\n' + context + '\n\n' + err.message;
+	  throw err;
+	};
+
+	exports.DebugItem = function DebugItem(lineno, filename) {
+	  this.lineno = lineno;
+	  this.filename = filename;
+	};
+
+/***/ },
 /* 9 */
 /***/ function(module, exports) {
+
+	/* (ignored) */
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -726,16 +954,23 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	__webpack_require__(11);
+
+	var _menu = __webpack_require__(13);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Menu = function () {
 	  function Menu(opts) {
 	    _classCallCheck(this, Menu);
 
-	    this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
-	    console.time('Handlebars compile menu');
-	    this._template = Handlebars.compile(this.__templateSrc);
-	    console.timeEnd('Handlebars compile menu');
+	    console.time('Handlebars set menu');
+	    this._template = _menu2.default;
+	    console.timeEnd('Handlebars set menu');
 
 	    this.el = document.createElement('div');
 
@@ -807,6 +1042,83 @@
 	}();
 
 	exports.default = Menu;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(12);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./menu.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./menu.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/* Styles go here */\n\n.close {\n  position: absolute;\n  right: 32px;\n  top: 0;\n  width: 32px;\n  height: 32px;\n  opacity: 0.3;\n  cursor: pointer;\n}\n.close:hover {\n  opacity: 1;\n}\n.close:before, .close:after {\n  position: absolute;\n  left: 15px;\n  content: ' ';\n  height: 33px;\n  width: 2px;\n  background-color: #333;\n}\n.close:before {\n  transform: rotate(45deg);\n}\n.close:after {\n  transform: rotate(-45deg);\n}\n\n.pure-menu-item .close {\n  display: none;\n}\n\n.pure-menu-item:hover .close {\n  display: block;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(8);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+	;var locals_for_with = (locals || {});(function (items, title, undefined) {
+	buf.push("<div class=\"pure-menu custom-restricted-width\"><span class=\"pure-menu-heading\">" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</span><ul class=\"pure-menu-list\">");
+	// iterate items
+	;(function(){
+	  var $$obj = items;
+	  if ('number' == typeof $$obj.length) {
+
+	    for (var index = 0, $$l = $$obj.length; index < $$l; index++) {
+	      var item = $$obj[index];
+
+	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a></li>");
+	    }
+
+	  } else {
+	    var $$l = 0;
+	    for (var index in $$obj) {
+	      $$l++;      var item = $$obj[index];
+
+	buf.push("<li" + (jade.attr("data-index", index, true, true)) + " class=\"pure-menu-item\"><a data-action=\"pick\"" + (jade.attr("href", item.href, true, true)) + " class=\"pure-menu-link\">" + (jade.escape(null == (jade_interp = item.anchor) ? "" : jade_interp)) + "</a></li>");
+	    }
+
+	  }
+	}).call(this);
+
+	buf.push("</ul></div>");}.call(this,"items" in locals_for_with?locals_for_with.items:typeof items!=="undefined"?items:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined,"undefined" in locals_for_with?locals_for_with.undefined: false?undefined:undefined));;return buf.join("");
+	}
 
 /***/ }
 /******/ ]);

@@ -1,11 +1,13 @@
 'use strict';
 
+import './menu.css'
+import template from './menu.jade'
+
 export default class Menu {
   constructor(opts) {
-    this.__templateSrc = document.querySelector(opts.tmpl).innerHTML;
-    console.time('Handlebars compile menu');
-    this._template = Handlebars.compile(this.__templateSrc);
-    console.timeEnd('Handlebars compile menu');
+    console.time('Handlebars set menu');
+    this._template = template;
+    console.timeEnd('Handlebars set menu');
 
     this.el = document.createElement('div');
 
