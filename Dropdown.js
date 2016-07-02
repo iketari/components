@@ -1,11 +1,12 @@
-(function () {
+define('./template', function (TemplateEngine) {
+
 	'use strict';
 
 	class Dropdown {
 		constructor (options, data) {
 			this.el = options.el;
 
-			this._template = document.getElementById(options.template).innerHTML;
+			this._template = document.getElementById('DropdownTmpl').innerHTML;
 			this.data = data;
 
 			this._itemSelectCallbacks = [];
@@ -93,6 +94,6 @@
 	}
 
 	//EXPORT
-	window.Dropdown = Dropdown;
+	return Dropdown;
 
-})();
+});
